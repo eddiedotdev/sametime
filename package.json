@@ -1,0 +1,17 @@
+{
+  "name": "sametime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env src/main.js",
+    "test": "node --test",
+    "check": "node --check src/main.js && node --check src/localize.js && node --check src/processor.js && node --check src/listener.js"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "@slack/socket-mode": "^2.0.6",
+    "@slack/web-api": "^7.0.0",
+    "luxon": "^3.7.2"
+  }
+}
