@@ -60,7 +60,7 @@ Standup moves to Tomorrow at 6:00 PM. Bring your notes. (edited)
 
 Details worth knowing:
 
-- Matching is case-insensitive and the word `at` is optional: `tomorrow 3pm` works. `from` works in its place: `today from 3-4 PM`.
+- Matching is case-insensitive and the word `at` is optional: `tomorrow 3pm` works. `@` and `from` work in its place: `tomorrow @ 10pm`, `today from 3-4 PM`.
 - A time needs either AM/PM or minutes. `3pm`, `3 PM`, and `15:00` qualify; a bare `3` or `at 3` does not.
 - A time with no date means the day you sent the message, even if that time has already passed. It never rolls forward to tomorrow.
 - `today`, `tomorrow`, and bare times render as a relative day ("Today", "Tomorrow", "Yesterday", or a short date) from each reader's point of view. `YYYY-MM-DD` dates render as a numeric date.

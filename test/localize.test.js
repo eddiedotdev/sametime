@@ -357,3 +357,20 @@ test('from is accepted like at before a time, with or without a leading day', ()
     assert.deepEqual(summary(result), expected, text);
   }
 });
+
+test('@ is accepted like at before a time, with or without spaces or a leading day', () => {
+  const cases = [
+    ['see you tomorrow @ 10pm', 'see you ', [['2026-10-03T05:00Z', RELATIVE]]],
+    ['see you tomorrow @10pm', 'see you ', [['2026-10-03T05:00Z', RELATIVE]]],
+    ['standup @ 9:30', 'standup ', [['2026-10-01T16:30Z', RELATIVE]]],
+    ['2026-10-02 @ 3-4 PM works', undefined, [['2026-10-02T22:00Z', EXACT], ['2026-10-02T23:00Z', TIME_ONLY]]],
+    ['tomorrow @ 3 PM or @ 5 PM', undefined, [['2026-10-02T22:00Z', RELATIVE], ['2026-10-03T00:00Z', TIME_ONLY]]],
+  ];
+  for (const [text, leading, expected] of cases) {
+    const result = localize(message(text), PHOENIX);
+    assert.ok(result, text);
+    assert.equal(result.blocks[0].elements[0].elements[0].text, leading, text);
+    assert.deepEqual(summary(result), expected, text);
+  }
+  assert.equal(localize(message('tomorrow @ 10'), PHOENIX), null);
+});

@@ -1,13 +1,13 @@
 import { DateTime, IANAZone } from 'luxon';
 
 // Only AM/PM clocks or complete H:mm clocks qualify; ordinary numbers do not.
-// A missing day means the sender-local send date. "at" or "from" is optional.
+// A missing day means the sender-local send date. "at", "@" or "from" is optional.
 // A range start may be a bare hour that borrows AM/PM from the end: "3-4 PM".
 const CLOCK = String.raw`\d{1,2}(?::\d{2})?[ \t]*(?:AM|PM)|\d{1,2}:\d{2}`;
 const RANGE_START = String.raw`\d{1,2}(?::\d{2})?(?:[ \t]*(?:AM|PM))?`;
 const RANGE_SEPARATOR = String.raw`[ \t]*[-–—][ \t]*|[ \t]+(?:to|until|till|through)[ \t]+`;
 const TIME_EXPRESSION = new RegExp(
-  String.raw`\b(?:(?<date>\d{4}-\d{2}-\d{2}|today|tomorrow)[ \t]+(?:(?:at|from)[ \t]+)?|(?:at|from)[ \t]+)?(?:(?<start>${RANGE_START})(?:${RANGE_SEPARATOR}))?(?<end>${CLOCK})\b`,
+  String.raw`(?:\b(?<date>\d{4}-\d{2}-\d{2}|today|tomorrow)[ \t]+(?:(?:at|from)[ \t]+|@[ \t]*)?|\b(?:at|from)[ \t]+|(?<!\w)@[ \t]*)?\b(?:(?<start>${RANGE_START})(?:${RANGE_SEPARATOR}))?(?<end>${CLOCK})\b`,
   'dgi',
 );
 const CLOCK_PARTS = /^(\d{1,2})(?::(\d{2}))?(?:[ \t]*(AM|PM))?$/i;
